@@ -33,8 +33,11 @@ public class Recv {
         Consumer consumer = new DefaultConsumer(channel) {
         public void handleDelivery(String consumerTag, Envelope envelope, AMQP.BasicProperties properties, byte[] body)
           throws IOException {
-        String message = new String(body, "UTF-8");
-        System.out.println(" [x] Received '" + message + "'");
+        ProductOrder message = (ProductOrder)RabbitUtility.getObject(body);
+        
+        //String message = new String(body, "UTF-8");
+        System.out.println(" [x] Received name'" + message.getName() + "'");
+        System.out.println(" [x] Received price'" + message.getPrice() + "'");
       }
     };
     channel.basicConsume(QUENAME, true, consumer);

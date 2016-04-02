@@ -22,6 +22,7 @@ public class RabbitMQApp {
      * @param args the command line arguments
      */
     public static void main(String[] args) throws Exception {
+        ProductOrder order = new ProductOrder("Kerrie Channer", 34.50);
         ConnectionFactory factory = new ConnectionFactory();
         String uri = "amqp://ytsoedex:Qu2LCiBJ5x9fhRUyLYkMhJqsURJ9dkSP@chicken.rmq.cloudamqp.com/ytsoedex";
         factory.setUri(uri);
@@ -35,8 +36,8 @@ public class RabbitMQApp {
         
         channel.queueDeclare(QUENAME, false, false, false, null);
         String message = "Hello World!";
-        channel.basicPublish("", QUENAME, null, message.getBytes());
-        System.out.println(" [x] Sent '" + message + "'");
+        channel.basicPublish("", QUENAME, null, RabbitUtility.convertToByteArray(order));
+        System.out.println(" [x] Sent '" + order + "'");
         
         channel.close();
         connection.close();
