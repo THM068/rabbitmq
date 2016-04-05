@@ -25,7 +25,7 @@ public class Recv {
         factory.setUri(uri);
         
         Connection connection = factory.newConnection();
-       Channel channel = connection.createChannel();
+        Channel channel = connection.createChannel();
 
         channel.queueDeclare(QUENAME, false, false, false, null);
         System.out.println(" [*] Waiting for messages. To exit press CTRL+C");
@@ -33,6 +33,7 @@ public class Recv {
         Consumer consumer = new DefaultConsumer(channel) {
         public void handleDelivery(String consumerTag, Envelope envelope, AMQP.BasicProperties properties, byte[] body)
           throws IOException {
+        System.out.println(String.format("The consumer tag is %s",consumerTag ));
         ProductOrder message = (ProductOrder)RabbitUtility.getObject(body);
         
         //String message = new String(body, "UTF-8");

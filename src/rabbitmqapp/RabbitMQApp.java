@@ -22,7 +22,7 @@ public class RabbitMQApp {
      * @param args the command line arguments
      */
     public static void main(String[] args) throws Exception {
-        ProductOrder order = new ProductOrder("Kerrie Channer", 34.50);
+        ProductOrder order = new ProductOrder("Thando Mlauzi", 34.50);
         ConnectionFactory factory = new ConnectionFactory();
         String uri = "amqp://ytsoedex:Qu2LCiBJ5x9fhRUyLYkMhJqsURJ9dkSP@chicken.rmq.cloudamqp.com/ytsoedex";
         factory.setUri(uri);
